@@ -44,3 +44,123 @@ Below is a list of technologies used in this project, along with a brief explana
 8. Celery: A task queue used with Django and Redis for handling asynchronous background tasks like email sending or scheduled jobs.
 
 9. Git: A version control system used to track changes in source code and facilitate collaboration between team members.
+
+## 🗄️ Database Design
+
+### Key Entities and Their Fields
+
+#### **User**
+- `id`
+- `username`
+- `email`
+- `password_hash`
+- `role` (guest, host, admin)
+
+#### **Property**
+- `id`
+- `title`
+- `description`
+- `location`
+- `price_per_night`
+- `owner_id` (foreign key to User)
+
+#### **Booking**
+- `id`
+- `user_id` (foreign key to User)
+- `property_id` (foreign key to Property)
+- `start_date`
+- `end_date`
+
+#### **Review**
+- `id`
+- `user_id` (foreign key to User)
+- `property_id` (foreign key to Property)
+- `rating`
+- `comment`
+
+#### **Payment**
+- `id`
+- `booking_id` (foreign key to Booking)
+- `amount`
+- `payment_status`
+- `payment_method`
+
+### Relationships
+
+- A user can list multiple properties.
+- A user can book multiple properties.
+- A booking is linked to one property and one user.
+- A review is made by a user for a specific property.
+- A payment is tied to a single booking.
+
+---
+
+## ✨ Feature Breakdown
+
+### Main Features of the Airbnb Clone Project
+
+- **User Management**  
+  Allows users to register, log in, manage profiles, and view booking history.
+
+- **Property Management**  
+  Hosts can add, edit, and delete property listings with descriptions, images, and availability.
+
+- **Booking System**  
+  Enables guests to browse listings, make bookings, and check availability based on dates.
+
+- **Review System**  
+  Guests can leave reviews and ratings after their stay, helping maintain service quality.
+
+- **Payment Integration**  
+  Secure and reliable payments are processed for bookings, with receipts and status updates.
+
+---
+
+## 🔒 API Security
+
+### Security Measures to Protect the API and User Data
+
+- **Authentication**  
+  Verifies user identity via tokens (e.g., JWT) to restrict access to protected routes.
+
+- **Authorization**  
+  Ensures users can only access or modify resources they own or are permitted to use.
+
+- **Rate Limiting**  
+  Prevents abuse by limiting the number of requests a user can make in a given time.
+
+- **Input Validation**  
+  Guards against SQL injection, XSS, and other malicious input attempts.
+
+- **Data Encryption**  
+  Sensitive data like passwords and payment details are encrypted during transmission and storage.
+
+### Why It's Important
+
+- Protects user data and privacy.  
+- Prevents fraudulent transactions and unauthorized access.  
+- Builds trust and maintains platform integrity.
+
+---
+
+## 🚀 CI/CD Pipeline
+
+### Overview
+
+**CI/CD (Continuous Integration/Continuous Deployment)** is a development practice that helps automate testing and deployment processes.
+
+- **CI** ensures that every change pushed to the codebase is automatically tested.
+- **CD** automates deployment to staging/production environments after successful tests.
+
+### Tools Used
+
+- **GitHub Actions**: Automates testing, building Docker containers, and deployment.  
+- **Docker**: Ensures consistent environments from development to production.  
+- **Heroku/AWS/Azure (optional)**: Cloud hosting for deployed applications.
+
+### Why It Matters
+
+- Speeds up development cycles.  
+- Reduces bugs in production.  
+- Encourages continuous delivery of new features.
+
